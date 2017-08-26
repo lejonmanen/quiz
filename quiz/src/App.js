@@ -4,18 +4,28 @@ import Teacher from './components/Teacher';
 import Student from './components/Student';
 //exec('wget https://www.gstatic.com/firebasejs/4.3.0/firebase.js', function(stdout) {});
 
+var config = {
+	apiKey: "AIzaSyD4enhFP8mwvh8L-XtgbpUvPoVlAr42p2U",
+	authDomain: "quiz-9a8a7.firebaseapp.com",
+	databaseURL: "https://quiz-9a8a7.firebaseio.com",
+	projectId: "quiz-9a8a7",
+	storageBucket: "quiz-9a8a7.appspot.com",
+	messagingSenderId: "176675875694"
+};
+window.firebase.initializeApp(config);
+
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			questionDraft: {
-				title: 'heeeeej',
+			questionDraft: null
+				/*title: 'heeeeej',
 				options: ['alt 1', 'alt 3'],
 				anonymousOk: true
 			},
 			currentQuestion: null,
-			participants: []
-		}
+			participants: []*/
+		};
 		/*this.state = {
 			pastQuestions: [],
 			questionDraft: {
@@ -33,6 +43,7 @@ class App extends Component {
 		}*/
 	}
 	render() {
+		console.log('App render, currrentQ=',this.state.currentQuestion);
 		return (
 			<div className="App">
 				<div className="App-header">
@@ -45,9 +56,7 @@ class App extends Component {
 					participants={this.state.participants}
 				/>
 				<hr/>
-				<Student
-					registerParticipant={this.registerParticipant}
-					/>
+				<Student />
 
 			</div>
 		);
@@ -69,28 +78,12 @@ class App extends Component {
 				</p>
 		 */
 	}
-	registerParticipant(name) {
-		this.setState({name: name});
-	}
 
 
 	componentWillMount() {
 		// Initialize Firebase
 		//this.firebaseRef = new Firebase("https://ReactFireTodoApp.firebaseio.com/items/");
 
-		let db = window.firebase.database();
-		db.ref('user-david/').once('value', function(snapshot) {
-			// set state
-			let value = snapshot.val();
-			if( value )
-				this.setState({
-					db: db,
-					pastQuestions: value.pastQuestions,
-					questionDraft: value.questionDraft,
-					currentQuestion: value.currentQuestion,
-					participants: value.participants
-				})
-		});
 	}
 
 }
