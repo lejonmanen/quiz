@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Route, Switch} from 'react-router-dom';
 import './App.css';
 import Teacher from './components/Teacher';
 import Student from './components/Student';
@@ -50,13 +51,15 @@ class App extends Component {
 					<h1>Quiz</h1>
 				</div>
 
-				<Teacher
+				<Switch>
+				<PropsRoute path='/teacher' component={Teacher}
 					questionDraft={this.state.questionDraft}
 					currentQuestion={this.state.currentQuestion}
 					participants={this.state.participants}
-				/>
-				<hr/>
-				<Student />
+					/>
+				<Route path='/student/' component={Student}/>
+				<Route path='/' component={Student}/>
+				</Switch>
 
 			</div>
 		);
@@ -87,5 +90,21 @@ class App extends Component {
 	}
 
 }
+
+const renderMergedProps = (component, ...rest) => {
+	const finalProps = Object.assign({}, ...rest);
+	return (
+		React.createElement(component, finalProps)
+	);
+}
+
+const PropsRoute = ({ component, ...rest }) => {
+	return (
+		<Route {...rest} render={routeProps => {
+			return renderMergedProps(component, routeProps, rest);
+		}}/>
+	);
+}
+
 
 export default App;
