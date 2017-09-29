@@ -20,7 +20,7 @@ class App extends Component {
 		super(props);
 		this.state = {
 			questionDraft: null
-				/*title: 'heeeeej',
+				/*title: 'Fråga?',
 				options: ['alt 1', 'alt 3'],
 				anonymousOk: true
 			},
@@ -85,12 +85,12 @@ class App extends Component {
 
 	componentWillMount() {
 		// Initialize Firebase
-		//this.firebaseRef = new Firebase("https://ReactFireTodoApp.firebaseio.com/items/");
 
 	}
 
 }
 
+// Because we cannot send props or state directly to the Route component
 const renderMergedProps = (component, ...rest) => {
 	const finalProps = Object.assign({}, ...rest);
 	return (
