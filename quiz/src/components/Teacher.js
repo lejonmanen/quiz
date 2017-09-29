@@ -16,7 +16,7 @@ class Teacher extends Component {
 		console.log('Teacher', this.state, '-- current question is ', this.state.currentQuestion);
 		return (
 			<div className="teacher">
-				<h1>Lärarläge: David (TODO byta användare)</h1>
+				<h1>Lärarläge: David</h1>
 				
 				<WriteQuestion draft={this.state.questionDraft} />
 				<Result q={this.state.currentQuestion} party={this.state.participants} />
